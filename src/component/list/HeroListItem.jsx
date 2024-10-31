@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import Image from "../ui/Image";
 
 const Wrapper = styled.div`
     width: calc(100% - 32px);
     padding: 16px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     border: 1px solid grey;
     border-radius: 8px;
     cursor: pointer;
@@ -27,6 +28,7 @@ function HeroListItem(props) {
 
     return (
         <Wrapper onClick={onClick}>
+            <Image src={hero.photo ? '/images/'+hero.photo : '/images/face-24px.svg'} alt={hero.name} />
             <TitleText>{hero.name}</TitleText>
         </Wrapper>
     );

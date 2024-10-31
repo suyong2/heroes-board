@@ -2,6 +2,7 @@
     {
         "id": 1,
         "name": "아이언맨",
+        "photo": "ironman.webp",
         "phoneNum": "010-1234-5678"
     },
     {
