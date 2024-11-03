@@ -55,10 +55,18 @@ function HeroViewPage(props) {
     const hero = useMemo(() => data.find((item) => item.id == heroId), []);
 
     // hero의 초기 데이터를 상태로 설정
+    const [preview, setPreview] = useState(hero && hero.photo ? '/images/'+hero.photo : '/images/face-24px.svg');
     const [name, setName] = useState(hero ? hero.name : '');
     const [phoneNum, setPhoneNum] = useState(hero ? hero.phoneNum : '');
-    const [photoFile, setPhotoFile] = useState(hero && hero.photo ? hero.photo : '');
-     
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setPreview(imageURL);
+        }
+    };
+
     return (
         <Wrapper>
             <Container>
@@ -69,7 +77,22 @@ function HeroViewPage(props) {
                     }}
                 />
                 <HeroContainer>
-                    <Image src={hero.photo ? '/images/'+hero.photo : '/images/face-24px.svg'} alt={hero.name} />
+                    <div>
+                        <div
+                            style={{
+                                width: '100px',
+                                height: '100px',
+                                border: '1px solid #ddd',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            <img src={preview} alt="preview" style={{ width: '100%', height: '100%' }} />
+                        </div>
+                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                    </div>   
                     <InputContainer>
                         <Label>이름:</Label>
                         <TextInput

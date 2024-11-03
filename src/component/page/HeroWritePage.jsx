@@ -54,10 +54,18 @@ const TitleText = styled.p`
 
 function HeroWritePage(props) {
     const navigate = useNavigate();
-
+    
+    const [preview, setPreview] = useState(null);
     const [name, setName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
-    const [photoFile, setPhotoFile] = useState(''); 
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setPreview(imageURL);
+        }
+    };
 
     return (
         <Wrapper>
@@ -69,7 +77,26 @@ function HeroWritePage(props) {
                     }}
                 />
                 <HeroContainer>
-                    <Image src={photoFile ? '/images/'+photoFile : '/images/face-24px.svg'} alt={name} />
+                    <div>
+                        <div
+                            style={{
+                                width: '100px',
+                                height: '100px',
+                                border: '1px solid #ddd',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            {preview ? (
+                                <img src={preview} alt="preview" style={{ width: '100%', height: '100%' }} />
+                            ) : (
+                                <p>No Image</p>
+                            )}
+                        </div>
+                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                    </div>                    
                     <InputContainer>
                         <Label>이름:</Label>
                         <TextInput
@@ -91,8 +118,9 @@ function HeroWritePage(props) {
                 </HeroContainer>
                 <ButtonContainer>
                     <Button
-                        title='수정하기'
+                        title='등록하기'
                         onClick={() => {
+                            alert("등록되었습니다!")
                             navigate('/');
                         }}
                     />                    

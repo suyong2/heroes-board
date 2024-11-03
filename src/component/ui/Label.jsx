@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledLabel = styled.label`
     font-size: 16px;
     margin-right: 16px;
-    width: 100px; /* Label에 고정 너비 설정 */
+    width: 150px; /* Label에 고정 너비 설정 */
     line-height: 1.5;
 `;
 
